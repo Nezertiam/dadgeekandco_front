@@ -4,6 +4,8 @@ const loadingReducer = (state = true, action) => {
             return true;
         case "UNSET_LOADING":
             return false;
+        case "FIRST_CONNEXION":
+            return false
         default:
             return state;
     }

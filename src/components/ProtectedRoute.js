@@ -6,7 +6,7 @@ const ProtectedRoute = (props) => {
     return (
         <>
             {
-                props.validity ? (
+                props.isLogged ? (
                     <Route {...props} />
                 ) : (
                     <Redirect to="/" />

@@ -49,7 +49,7 @@ const mergeConfigs = (config = {}) => {
  * @returns 
  */
 const buildURI = (path) => {
-    const baseURL = process.env.API_URL;
+    // const baseURL = process.env.API_URL;
     // const uri = baseURL + path;
     const uri = path;
     return uri;
