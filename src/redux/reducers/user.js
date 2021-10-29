@@ -4,7 +4,7 @@ const userReducer = (state = null, action) => {
             return action.payload.user;
         case "DISCONNECT":
             return null;
-        case "FIRST_CONNECION":
+        case "FIRST_CONNEXION":
             return action.payload.user;
         default:
             return state;

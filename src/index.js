@@ -11,6 +11,10 @@ import App from './App';
 // Reducers
 import reducers from "./redux/reducers/index";
 
+// Theming
+import * as themes from './themes/schema.json';
+import { setToLS } from './utils/storage';
+
 
 
 
@@ -22,12 +26,21 @@ const store = createStore(
 
 
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
 
+
+const Index = () => {
+  setToLS('all-themes', themes.default);
+  return (
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  )
+}
+
+
+ReactDOM.render(
+  <Index />,
   document.getElementById('root')
 );

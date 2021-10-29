@@ -2,17 +2,16 @@ import jsonwebtoken from "jsonwebtoken";
 
 export const isTokenExpired = (token) => {
     token = (token) ? token : localStorage.getItem('token');
-    const refreshToken = localStorage.getItem('refreshToken');
     try {
-        jsonwebtoken.decode(token);
-        const { exp } = jsonwebtoken.decode(refreshToken);
+        const { exp } = jsonwebtoken.decode(token);
         if (Date.now() >= exp * 1000) {
+            return true;
+        } else {
             return false;
         }
     } catch (err) {
-        return false;
+        return true;
     }
-    return true;
 }
 
 export default isTokenExpired;
