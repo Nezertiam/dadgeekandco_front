@@ -4,7 +4,7 @@ const profileReducer = (state = null, action) => {
             return action.payload.profile;
         case "DISCONNECT":
             return null;
-        case "FIRST_CONNECION":
+        case "FIRST_CONNEXION":
             return action.payload.profile;
         default:
             return state;
