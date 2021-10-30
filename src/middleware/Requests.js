@@ -1,5 +1,7 @@
 import ApiHandler from "./api/ApiHandler";
 
+const url = "http://localhost:5000/api";
+
 export const getUser = async () => {
     const response = await ApiHandler.get("http://localhost:5000/api/profile/me");
     const data = {
@@ -11,8 +13,19 @@ export const getUser = async () => {
     return data;
 }
 
+export const login = async (email, password) => {
+    const response = await ApiHandler.post(`${url}/security/auth`, { email, password });
+    if (response.data) localStorage.setItem("token", response.data);
+}
+
+
+
+
+
+
 const Requests = {
-    getUser: getUser
+    getUser: getUser,
+    login: login
 }
 
 export default Requests;

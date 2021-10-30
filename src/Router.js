@@ -2,8 +2,8 @@
 import React from 'react'
 import { Route, Switch } from 'react-router';
 import { useSelector } from 'react-redux';
-import { getFromLS } from './utils/storage';
 import TestPage from './pages/test/TestPage';
+import LoginPage from './pages/auth/login/LoginPage';
 
 // Components
 // import ProtectedRoute from './components/ProtectedRoute';
@@ -14,9 +14,6 @@ import TestPage from './pages/test/TestPage';
 const Router = () => {
 
     const isLoading = useSelector((state) => state.isLoading);
-    const themes = getFromLS("all-themes");
-
-    console.log(themes)
 
     if (isLoading) return (
         <>
@@ -33,6 +30,7 @@ const Router = () => {
         <>
             <Switch>
                 <Route exact path="/test" component={TestPage} />
+                <Route exact path="/connexion" component={LoginPage} />
             </Switch>
         </>
     );

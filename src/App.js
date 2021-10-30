@@ -12,6 +12,7 @@ import Router from "./Router";
 // Hooks
 import hooks from "./hooks";
 import { GlobalStyles } from "./themes/GlobalStyles";
+import Layout from "./pages/Layout";
 
 
 
@@ -67,7 +68,9 @@ const App = () => {
     <>
       <ThemeProvider theme={selectedTheme}>
         <GlobalStyles />
-        <Router />
+        <Layout>
+          <Router />
+        </Layout>
       </ThemeProvider>
     </>
   )

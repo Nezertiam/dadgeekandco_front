@@ -1,8 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 
+// font-family: 'Lato', sans-serif;
+// font-family: 'Open Sans', sans-serif;
+
 export const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
   }
 
   body {
@@ -10,6 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.text};
     font-family: ${({ theme }) => theme.font};
     transition: all 0.50s linear;
+    
   }
 
   a {
@@ -25,13 +32,29 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 4px;
     margin-top: 5px;
     cursor: pointer;
-    background-color: #1064EA;
-    color: #FFFFFF;
+    background-color: ${({ theme }) => theme.colors.button.background};
+    color: ${({ theme }) => theme.colors.button.text};
     font-family: ${({ theme }) => theme.font};
+    letter-spacing: 1px;
+    font-weight: 600;
   }
 
   button.btn {
     background-color: ${({ theme }) => theme.colors.button.background};
     color: ${({ theme }) => theme.colors.button.text};
+  }
+
+  input {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 1rem;
+    margin-block: 0.5rem;
+  }
+
+  .layout-header, .layout-footer {
+    z-index: 3;
+  }
+  .layout-main-content {
+    z-index: 2;
   }
 `;
