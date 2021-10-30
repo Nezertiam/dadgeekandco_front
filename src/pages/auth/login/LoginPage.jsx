@@ -10,15 +10,13 @@ const LoginPage = () => {
 
     return (
         <Container>
-            <div className="glass-effect"></div>
             <h1>Se connecter</h1>
             <h2>Le blog des Geemers</h2>
             <LoginForm />
             <hr />
-            <div>
+            <div className="goto-register-message">
                 <p>Pas encore inscrit&nbsp;?</p>
                 <p>C'est pas par là... On peut pas encore s'inscrire :'(</p>
-                <p className="credits">&copy;DadGeek 2021</p>
             </div>
         </Container>
     )
@@ -27,41 +25,36 @@ const LoginPage = () => {
 const Container = styled.div`
     max-width: 450px;
     margin: 0 auto;
-    padding: 2rem 2.5rem 0.75rem;
-    margin-top: 2rem;
-    border-radius: 10px;
-    border: ${({ theme }) => theme.colors.container.border};
-    overflow: hidden;
-    position: relative;
-    
-    .glass-effect {
-        background-color: ${({ theme }) => theme.colors.container.backgroundglass};
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        filter: blur(1rem);
-        
-    }
-    
+    padding: 2rem 1rem 0.75rem;
+    border-top: ${({ theme }) => theme.colors.container.border};
+    border-left: ${({ theme }) => theme.colors.container.border};
+    background-color: ${({ theme }) => theme.colors.container.background};
+    backdrop-filter: blur(5px);
+    min-height: 100%;
     h1 {
         text-align: center;
         margin-top: 0.5rem;
-        margin-bottom: 3.5rem;
+        margin-bottom: 2.5rem;
+    }
+    h2 {
+        margin-bottom: 1rem;
     }
     hr {
+        margin: 0 auto;
         margin-top: 2.5rem;
         margin-bottom: 1.5rem;
-        border-top: 1px solid #ffffffd3;
+        border: none;
+        border-top: 1px solid ${({ theme }) => theme.colors.hr};
+        max-width: 225px;
     }
-    p {
-        text-align: center;
-        &.credits {
-            margin-top: 2.5rem;
-            font-size: 0.8rem;
+    .goto-register-message {
+        margin-bottom: 2.5rem;
+        p {
+            text-align: center;
         }
+    }
+    @media screen and (min-width: 494px) {
+        background-color: ${({ theme }) => theme.colors.container.backgroundglass};
     }
 `
 

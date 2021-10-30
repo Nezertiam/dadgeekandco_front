@@ -2,26 +2,40 @@ import { createGlobalStyle } from "styled-components";
 
 // font-family: 'Lato', sans-serif;
 // font-family: 'Open Sans', sans-serif;
+// font-family: 'Poppins', sans-serif;
 
 export const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+  }
+
+  #root {
+    min-height: 100vh;
+    position: relative;
+    display: table;
+    height: 100%;
+    width: 100%;
   }
 
   body {
     background: ${({ theme }) => theme.colors.body};
     color: ${({ theme }) => theme.colors.text};
     font-family: ${({ theme }) => theme.font};
-    transition: all 0.50s linear;
-    
+    /* transition: all 0.50s linear; */
+    height: 100%;
+    width: 100%;
   }
 
   a {
     color: ${({ theme }) => theme.colors.link.text};
     cursor: pointer;
+  }
+
+  li, ul, ol {
+    list-style: none;
   }
 
   button {

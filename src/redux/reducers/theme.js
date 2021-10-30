@@ -1,7 +1,8 @@
 import { getFromLS, setToLS } from "../../utils/storage";
+import * as schemaThemes from "../../themes/schema.json";
 
 let theme = getFromLS("theme");
-const themes = getFromLS("all-themes");
+const themes = getFromLS("all-themes") ?? schemaThemes.default;
 
 theme = theme ?? themes.data.light;
 

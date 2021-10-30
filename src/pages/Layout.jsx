@@ -1,23 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
+import Footer from '../components/layout/Footer'
+import Header from '../components/layout/Header'
+
+
 
 const Layout = ({ children }) => {
     return (
         <>
-            <header className="layout-header">
-                Header
-            </header>
-            <main className="layout-main-content">
+            <Header />
+            <Main className="layout-main-content">
                 <Background className="background" />
                 {children}
-            </main>
-            <footer className="layout-footer">
-                Footer
-            </footer>
+            </Main>
+            <Footer />
         </>
     )
 }
 
+const Main = styled.main`
+    display: table-row;
+`
 
 const Background = styled.div`
     z-index: -2;
@@ -25,10 +28,12 @@ const Background = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    top: 0;
-    /* filter: blur(10px); */
-    /* background: rgb(238,174,202);
-    background: linear-gradient(128deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); */
+    top: 65px;
+    overflow: hidden;
+    background-image: ${`url(${process.env.PUBLIC_URL}/assets/backgrounds/Overlay_Gameplay.png)`};
+    background-size: cover;
+    background-position: top right;
+    
 `
 
 
