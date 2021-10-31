@@ -21,6 +21,7 @@ const App = () => {
   const isLoading = useSelector((state) => state.isLoading);
   const isLogged = useSelector((state) => state.isLogged);
   const selectedTheme = useSelector((state) => state.theme);
+  const isServerConnected = useSelector((state) => state.isServerConnected);
 
   const handleIntervalCheck = () => {
     if (localStorage.getItem("token")) {
@@ -69,7 +70,11 @@ const App = () => {
       <ThemeProvider theme={selectedTheme}>
         <GlobalStyles />
         <Layout>
-          <Router />
+          {
+            isServerConnected
+              ? <Router />
+              : <div>Pas de connexion au serveur...</div>
+          }
         </Layout>
       </ThemeProvider>
     </>

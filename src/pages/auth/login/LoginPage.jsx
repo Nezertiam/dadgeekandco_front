@@ -1,4 +1,6 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 
 // Form
@@ -7,6 +9,10 @@ import LoginForm from './formik/LoginForm'
 
 
 const LoginPage = () => {
+
+    const isLogged = useSelector((state) => state.isLogged);
+
+    if (isLogged) return <Redirect to="/" />
 
     return (
         <Container>

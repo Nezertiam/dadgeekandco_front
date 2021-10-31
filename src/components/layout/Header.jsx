@@ -7,7 +7,7 @@ const Header = () => {
         <StyledHeader>
             <div className="left-container">
                 <div className="logo">
-                    DadGeek And Logo.
+
                 </div>
             </div>
             <div className="middle-container">

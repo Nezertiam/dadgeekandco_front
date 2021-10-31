@@ -15,7 +15,14 @@ export const getUser = async () => {
 
 export const login = async (email, password) => {
     const response = await ApiHandler.post(`${url}/security/auth`, { email, password });
-    if (response.data) localStorage.setItem("token", response.data);
+    if (response && response.data) {
+        localStorage.setItem("token", response.data);
+    }
+}
+
+export const getStream = async () => {
+    const response = await ApiHandler.twitchGet("https://api.twitch.tv/kraken/streams/dadgeek_and_co");
+    console.log(response);
 }
 
 
@@ -25,7 +32,8 @@ export const login = async (email, password) => {
 
 const Requests = {
     getUser: getUser,
-    login: login
+    login: login,
+    getStream: getStream
 }
 
 export default Requests;

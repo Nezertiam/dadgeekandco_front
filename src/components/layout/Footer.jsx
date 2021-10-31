@@ -41,7 +41,7 @@ const StyledFooter = styled.footer`
     display: table-row;
     background-color: ${({ theme }) => theme.colors.footer.background};
     color: ${({ theme }) => theme.colors.footer.text};
-    height: 1px; /* CSS Trick : The footer won't be bigger than needed */
+    height: 1px; /* CSS Trick : The footer won't be bigger than needed with that */
 
     .footer-container {
         padding: 2rem 1rem 0;

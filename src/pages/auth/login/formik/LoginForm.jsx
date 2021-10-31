@@ -14,7 +14,8 @@ const LoginForm = () => {
     // Local states
     const [complementValues, setComplementValues] = useState({
         showPassword: false,
-        isValid: false
+        isValid: false,
+        errors: []
     });
     const dispatch = useDispatch();
 
@@ -39,10 +40,12 @@ const LoginForm = () => {
                 const response = await Requests.getUser();
                 dispatch({ type: "CONNECT", payload: response });
             } catch (err) {
+                // console.log(err.message)
                 setSubmitting(false);
                 setComplementValues({
                     ...values,
-                    isValid: false
+                    isValid: false,
+                    errors: ["Identifiants invalides."]
                 });
             }
         }
@@ -71,9 +74,15 @@ const LoginForm = () => {
                             <Field type="password" name="password" disabled={complementValues.isValid} placeholder="Mot de passe" />
                             <ErrorMessage name="password" component="div" className="error-message" />
                         </div>
-                        <button type="submit" disabled={complementValues.isValid}>
-                            Valider
-                        </button>
+                        <div className="submit-container">
+                            <button type="submit" disabled={complementValues.isValid}>
+                                Valider
+                            </button>
+                            {
+                                (complementValues.errors && complementValues.errors.length > 0) &&
+                                <div className="error-message">Identifiants invalides.</div>
+                            }
+                        </div>
                     </StyledForm>
                 )}
             </Formik>
@@ -87,9 +96,12 @@ const StyledForm = styled(Form)`
         padding-top: 1rem;
         position: relative;
     }
-    .password-container {
+    .password-container{
         padding-top: 2rem;
         padding-bottom: 2.5rem;
+        position: relative;
+    }
+    .submit-container {
         position: relative;
     }
     .error-message {
@@ -105,7 +117,7 @@ const StyledForm = styled(Form)`
     }
     button {
         display: block;
-        margin: 0 auto;
+        margin: 0 auto 0.5rem;
     }
 `
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Footer from '../components/layout/Footer'
 import Header from '../components/layout/Header'
@@ -6,11 +7,18 @@ import Header from '../components/layout/Header'
 
 
 const Layout = ({ children }) => {
+
+    const theme = useSelector((state) => state.theme);
+    const background = theme.background.image;
+    const position = theme.background.position;
+    const url = `url("${process.env.PUBLIC_URL}/assets/backgrounds/${background}")`
+
+
     return (
         <>
             <Header />
             <Main className="layout-main-content">
-                <Background className="background" />
+                <Background className="background" url={url} position={position} />
                 {children}
             </Main>
             <Footer />
@@ -30,10 +38,9 @@ const Background = styled.div`
     bottom: 0;
     top: 65px;
     overflow: hidden;
-    background-image: ${`url(${process.env.PUBLIC_URL}/assets/backgrounds/Overlay_Gameplay.png)`};
+    background-image: ${props => props.url};
     background-size: cover;
-    background-position: top right;
-    
+    background-position: ${props => props.position};
 `
 
 

@@ -6,6 +6,7 @@ import Copy from '../ui/Copy';
 
 const Menu = () => {
     const open = useSelector((state) => state.isOpen);
+    const isLogged = useSelector((state) => state.isLogged);
     const dispatch = useDispatch();
 
 
@@ -36,24 +37,31 @@ const Menu = () => {
                 <div></div>
                 <div></div>
             </Burger>
-            <StyledMenu className={open ? "open" : "closed"}>
+            <StyledMenu className={open ? "open" : "closed"} onClick={() => dispatch({ type: "CLOSE_MENU" })}>
                 <nav>
                     <ul>
-                        <li className="title">Twitch</li>
+                        {/* Home */}
+                        <li className="title"><Link to="/">Accueil</Link></li>
+
+
+                        {/* Twitch */}
+                        <li className="title separator"><Link to="/">Twitch</Link></li>
                         <hr />
-                        <li><a href="/">Mon live</a></li>
-                        <li><a href="/">Le live des copains</a></li>
+                        <li><Link to="/">Mon live</Link></li>
+                        <li><Link to="/">Le live des copains</Link></li>
 
 
-                        <li className="title separator">Le blog</li>
+                        {/* Blog */}
+                        <li className="title separator"><Link to="/">Le Blog</Link></li>
                         <hr />
-                        <li><a href="/">Les dernières actus</a></li>
-                        <li><a href="/">Recherche par catégorie</a></li>
+                        <li><Link to="/">Les dernières actus</Link></li>
+                        <li><Link to="/">Recherche par catégorie</Link></li>
 
-
+                        {/* Account */}
                         <li className="title separator">Mon compte</li>
                         <hr />
-                        <li><Link to="/connexion">Connexion</Link></li>
+                        {isLogged && <li><Link to="/" onClick={() => { dispatch({ type: "DISCONNECT" }) }}>Déconnexion</Link></li>}
+                        {!isLogged && <li><Link to="/connexion">Connexion</Link></li>}
                     </ul>
                 </nav>
                 <div className="copyright">
@@ -93,17 +101,21 @@ const StyledMenu = styled.div`
             margin: 10px 0;
             li {
                 &.title {
+                    color: ${({ theme }) => theme.colors.navbar.textAlt};
                     text-transform: uppercase;
                     font-weight: 700;
                     letter-spacing: 3px;
                     &.separator {
                         margin-top: 3rem;
                     }
+                    a {
+                        color: ${({ theme }) => theme.colors.navbar.textAlt};
+                        text-decoration: none;
+                    }
                 }
                 &:not(.title) {
                     padding-bottom: 10px;
                     &>* {
-                        text-decoration: none;
                         font-weight: 400;
                     }
                 }
