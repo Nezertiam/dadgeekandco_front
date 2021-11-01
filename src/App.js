@@ -33,6 +33,8 @@ const App = () => {
         localStorage.removeItem("token");
         if (isLogged) dispatch({ type: "DISCONNECT" });
       }
+    } else {
+      if (isLogged) dispatch({ type: "DISCONNECT" });
     }
     setTimeout(
       handleIntervalCheck,
