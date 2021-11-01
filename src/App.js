@@ -12,6 +12,7 @@ import Router from "./Router";
 // Hooks
 import hooks from "./hooks";
 import { GlobalStyles } from "./themes/GlobalStyles";
+import Layout from "./pages/Layout";
 
 
 
@@ -20,6 +21,7 @@ const App = () => {
   const isLoading = useSelector((state) => state.isLoading);
   const isLogged = useSelector((state) => state.isLogged);
   const selectedTheme = useSelector((state) => state.theme);
+  const isServerConnected = useSelector((state) => state.isServerConnected);
 
   const handleIntervalCheck = () => {
     if (localStorage.getItem("token")) {
@@ -67,7 +69,13 @@ const App = () => {
     <>
       <ThemeProvider theme={selectedTheme}>
         <GlobalStyles />
-        <Router />
+        <Layout>
+          {
+            isServerConnected
+              ? <Router />
+              : <div>Pas de connexion au serveur...</div>
+          }
+        </Layout>
       </ThemeProvider>
     </>
   )

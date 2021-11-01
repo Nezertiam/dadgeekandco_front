@@ -3,16 +3,38 @@
         "light": {
             "id": "T_001",
             "name": "Light",
+            "background": {
+                "image": "Overlay_Gameplay.png",
+                "position": "top right"
+            },
             "colors": {
-                "body": "#FFFFFF",
+                "body": "#e0e0e0d6",
                 "text": "#000000",
+                "hr": "#b6b6b6",
+                "container": {
+                    "backgroundglass": "rgba(255, 255, 255, 0.65)",
+                    "background": "rgb(255, 255, 255)",
+                    "border": "1px solid rgb(255, 255, 255)",
+                    "borderSec": "1px solid rgb(255, 255, 255)"
+                },
+                "navbar": {
+                    "text": "#FFFFFF",
+                    "textAlt": "#FFFFFF",
+                    "background": "#272727",
+                    "backgroundAlt": "#414040"
+                },
                 "button": {
                     "text": "#FFFFFF",
-                    "background": "#000000"
+                    "background": "#bf0f02"
                 },
                 "link": {
-                    "text": "teal",
+                    "text": "coral",
                     "opacity": 1
+                },
+                "footer": {
+                    "text": "white",
+                    "background": "#272727",
+                    "backgroundAlt": "#414040"
                 }
             }
         }

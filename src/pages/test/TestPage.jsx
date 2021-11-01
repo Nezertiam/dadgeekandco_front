@@ -6,7 +6,7 @@ const TestPage = () => {
             <p>C'est un p</p>
             <button>C'est un bouton</button>
             <br />
-            <a>C'est un lien</a>
+            <a href="/">C'est un lien</a>
         </div>
     )
 }

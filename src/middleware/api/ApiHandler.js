@@ -11,7 +11,6 @@ const axios = _axios.create({
 
 
 
-
 /**
  * Generate initial headers config with token
  * 
@@ -74,7 +73,7 @@ const get = async (path, config) => {
         console.log(response.data);
         return response.data;
     } catch (err) {
-        console.log(err);
+        console.log(err)
     }
 }
 
@@ -94,6 +93,7 @@ const post = async (path, data, config) => {
         return response.data;
     } catch (err) {
         console.log(err);
+
     }
 }
 
@@ -114,6 +114,7 @@ const put = async (path, data, config) => {
         return response.data;
     } catch (err) {
         console.log(err);
+
     }
 }
 
@@ -133,6 +134,7 @@ const remove = async (path, config) => {
         return response.data;
     } catch (err) {
         console.log(err);
+
     }
 }
 
