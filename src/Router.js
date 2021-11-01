@@ -2,14 +2,12 @@
 import React from 'react'
 import { Route, Switch } from 'react-router';
 import { useSelector } from 'react-redux';
-import TestPage from './pages/test/TestPage';
-import LoginPage from './pages/auth/login/LoginPage';
-import HomePage from './pages/home/HomePage';
 
 // Components
-// import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Pages
+import LoginPage from "./pages/auth/login/LoginPage";
 
 
 const Router = () => {
@@ -30,8 +28,6 @@ const Router = () => {
     return (
         <>
             <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/test" component={TestPage} />
                 <Route exact path="/connexion" component={LoginPage} />
             </Switch>
         </>
