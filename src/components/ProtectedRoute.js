@@ -4,12 +4,18 @@ import { Route, Redirect } from 'react-router-dom'
 
 const ProtectedRoute = (props) => {
 
-    const roles = useSelector((state) => state.user.roles);
+    const isLogged = useSelector((state) => state.isLogged);
+    const user = useSelector((state) => state.user)
+
+    if (!isLogged) {
+        return <Redirect to="/" />
+    }
+
 
     return (
         <>
             {
-                (roles.includes(props.role) || roles.includes("ROLE_ADMIN")) ? (
+                (user.roles.includes(props.role) || user.roles.includes("ROLE_ADMIN")) ? (
                     <Route {...props} />
                 ) : (
                     <Redirect to="/" />

@@ -8,6 +8,10 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 // Pages
 import LoginPage from "./pages/auth/login/LoginPage";
+import HomePage from "./pages/home/HomePage";
+import NotFound from "./pages/errors/NotFound";
+import NewArticlePage from './pages/blog/NewArticlePage';
+import EditArticlePage from './pages/blog/EditArticlePage';
 
 
 const Router = () => {
@@ -29,6 +33,10 @@ const Router = () => {
         <>
             <Switch>
                 <Route exact path="/connexion" component={LoginPage} />
+                <Route exact path="/" component={HomePage} />
+                <ProtectedRoute exact path="/blog/article/new" component={NewArticlePage} role="ROLE_AUTHOR" />
+                <ProtectedRoute exact path="/blog/article/edit/:slug" component={EditArticlePage} role="ROLE_AUTHOR" />
+                <Route path="/" component={NotFound} />
             </Switch>
         </>
     );

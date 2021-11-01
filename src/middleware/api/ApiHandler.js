@@ -1,5 +1,7 @@
 import _axios from "axios";
+import * as dictionnary from "./responseDictionnary.json"
 
+const dico = dictionnary.default;
 
 
 // Private handlers
@@ -57,6 +59,18 @@ const buildURI = (path) => {
 
 
 
+const errorHandler = (error) => {
+    console.log(error.response.data);
+    const response = error.response.data;
+    const message = dico[response.message];
+
+    if (message) response.message = message;
+    return response;
+}
+
+
+
+
 
 /**
  * Do a get request
@@ -73,7 +87,7 @@ const get = async (path, config) => {
         console.log(response.data);
         return response.data;
     } catch (err) {
-        console.log(err)
+        return errorHandler(err)
     }
 }
 
@@ -92,8 +106,7 @@ const post = async (path, data, config) => {
         console.log(response.data);
         return response.data;
     } catch (err) {
-        console.log(err);
-
+        return errorHandler(err);
     }
 }
 
@@ -113,7 +126,7 @@ const put = async (path, data, config) => {
         console.log(response.data);
         return response.data;
     } catch (err) {
-        console.log(err);
+        return errorHandler(err);
 
     }
 }
@@ -133,7 +146,7 @@ const remove = async (path, config) => {
         console.log(response.data);
         return response.data;
     } catch (err) {
-        console.log(err);
+        return errorHandler(err);
 
     }
 }

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
+    "@uiw/react-md-editor": "^3.6.5",
     "axios": "^0.24.0",
     "cra-template": "1.1.2",
     "dotenv": "^10.0.0",

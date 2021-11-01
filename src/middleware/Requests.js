@@ -1,9 +1,14 @@
 import ApiHandler from "./api/ApiHandler";
 
 const url = "http://localhost:5000/api";
+const urlBuilder = (path) => {
+    return url + path;
+}
 
+
+// USERs
 export const getUser = async () => {
-    const response = await ApiHandler.get("http://localhost:5000/api/profile/me");
+    const response = await ApiHandler.get(`${url}/profile/me`);
     const data = {
         user: { ...response.data.user },
         profile: { ...response.data }
@@ -20,20 +25,35 @@ export const login = async (email, password) => {
     }
 }
 
-export const getStream = async () => {
-    const response = await ApiHandler.twitchGet("https://api.twitch.tv/kraken/streams/dadgeek_and_co");
-    console.log(response);
+
+
+
+
+// ARTICLES
+export const getArticle = async (slug) => {
+    const response = await ApiHandler.get(`${url}/article/${slug}`);
+    return response;
+}
+
+export const postArticle = async (data) => {
+    const response = await ApiHandler.post(`${url}/article`, data);
+    return response;
+}
+
+export const putArticle = async (data, slug) => {
+    const response = await ApiHandler.put(`${url}/article/${slug}`, data);
+    return response;
 }
 
 
 
-
-
-
 const Requests = {
-    getUser: getUser,
-    login: login,
-    getStream: getStream
+    getUser,
+    login,
+
+    getArticle,
+    postArticle,
+    putArticle,
 }
 
 export default Requests;
