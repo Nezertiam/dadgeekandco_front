@@ -1,9 +1,6 @@
 import ApiHandler from "./api/ApiHandler";
 
 const url = "http://localhost:5000/api";
-const urlBuilder = (path) => {
-    return url + path;
-}
 
 
 // USERs
