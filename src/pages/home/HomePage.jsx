@@ -27,6 +27,7 @@ const HomePage = () => {
 
     return (
         <Container>
+            <h1>Le blog des Geemers</h1>
             <ArticlesUpdates articles={lastArticles} noArticleMessage={message} />
         </Container>
     )
@@ -50,7 +51,18 @@ const ArticlesUpdates = (props) => {
 
 
 const Container = styled(PageContainer)`
-
+    h1 {
+        text-align: center;
+        margin-top: 1rem;
+    }
+    .article-news-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &>* {
+            margin: 1rem 0;
+        }
+    }
 `
 
 

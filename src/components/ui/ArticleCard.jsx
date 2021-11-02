@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components'
 
 const ArticleCard = (props) => {
 
-    const { thumbnail, user, title } = props.article;
+    const { thumbnail, user, title, slug } = props.article;
+    const [clicked, setClicked] = useState(false);
+
+    if (clicked) {
+        return <Redirect to={`/blog/article/read/${slug}`} />
+    }
 
     return (
-        <Card {...props} thumbnail={thumbnail}>
+        <Card {...props} thumbnail={thumbnail} onClick={() => setClicked(true)}>
             <div className="article">
                 <div className="categories">
 
@@ -27,11 +33,11 @@ const ArticleCard = (props) => {
 
 const Card = styled.div`
 
-    width: 400px;
+    width: 275px;
     max-width: 85vw;
 
     .article {
-        border-radius: 10px 10px 0 0;
+        border-radius: 7px 7px 0 0;
         border: ${({ theme }) => theme.colors.container.border};
         border-bottom: none;
 
@@ -45,7 +51,7 @@ const Card = styled.div`
         background-size: cover;
 
         width: 100%;
-        height: 200px;
+        height: 150px;
         max-height: 45vw;
 
         .title {
@@ -57,8 +63,9 @@ const Card = styled.div`
         text-align: right;
         padding-right: 0.75rem;
         border: ${({ theme }) => theme.colors.container.border};
-        border-radius: 0 0 10px 10px;
+        border-radius: 0 0 7px 7px;
         border-top: none;
+        background: ${({ theme }) => theme.colors.container.background};
     }
 `
 

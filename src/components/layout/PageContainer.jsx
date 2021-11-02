@@ -13,6 +13,8 @@ const Container = styled.div`
     padding: 1rem;
     padding-top: 2rem;
     height: 100%;
+    max-width: 1128px;
+    margin: 0 auto;
 `
 
 export default PageContainer
