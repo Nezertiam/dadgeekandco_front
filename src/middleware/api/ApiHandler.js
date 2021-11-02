@@ -60,11 +60,17 @@ const buildURI = (path) => {
 
 
 const errorHandler = (error) => {
-    console.log(error.response.data);
-    const response = error.response.data;
+    const response = error.response ? error.response.data : {
+        code: 503,
+        status: "Service Unavailable",
+        message: "No server connexion."
+    };
     const message = dico[response.message];
 
     if (message) response.message = message;
+
+    console.log(response);
+
     return response;
 }
 

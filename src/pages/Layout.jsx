@@ -28,6 +28,7 @@ const Layout = ({ children }) => {
 
 const Main = styled.main`
     display: table-row;
+    height: 100%;
 `
 
 const Background = styled.div`

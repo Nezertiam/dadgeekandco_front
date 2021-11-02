@@ -11,6 +11,7 @@ import ReadContainer from "../../components/ui/ReadContainer";
 const WritingPage = () => {
 
     const [title, setTitle] = useState("");
+    const [thumbnail, setThumbnail] = useState("");
     const [content, setContent] = useState("");
     const [categories, setCategories] = useState([]);
     const [isSubmitting, setSubmitting] = useState(false);
@@ -25,6 +26,7 @@ const WritingPage = () => {
         const response = await Requests.getArticle(slug);
         if (response.code === 200) {
             setTitle(response.data.article.title);
+            setThumbnail(response.data.article.thumbnail)
             setContent(response.data.article.content);
             setCategories(response.data.article.categories);
             setArticle(response.data.article);
@@ -51,12 +53,14 @@ const WritingPage = () => {
                     data = {
                         title,
                         content,
-                        categories
+                        categories,
+                        thumbnail
                     }
                 } else {
                     data = {
                         content,
-                        categories
+                        categories,
+                        thumbnail
                     }
                 }
                 response = await Requests.putArticle(data, slug);
@@ -64,7 +68,8 @@ const WritingPage = () => {
                 data = {
                     title,
                     content,
-                    categories
+                    categories,
+                    thumbnail
                 }
                 response = await Requests.postArticle(data);
             }
@@ -98,6 +103,16 @@ const WritingPage = () => {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
+                <label htmlFor="article-thumbnail-input">Miniature</label>
+                <input
+                    type="text"
+                    id="article-thumbnail-input"
+                    name="article-thumbnail-input"
+                    placeholder="Miniature de l'article (lien http vers une image)"
+                    value={thumbnail}
+                    onChange={(e) => setThumbnail(e.target.value)}
+                />
+                <label>Contenu</label>
                 <MDEditor
                     value={content}
                     onChange={setContent}

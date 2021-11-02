@@ -35,17 +35,27 @@ const LoginForm = () => {
                 ...values,
                 isValid: true
             });
-            try {
-                await Requests.login(values.email, values.password);
-                const response = await Requests.getUser();
-                dispatch({ type: "CONNECT", payload: response });
-            } catch (err) {
-                // console.log(err.message)
+
+            let errors = [];
+
+            const loginResponse = await Requests.login(values.email, values.password);
+            if (loginResponse.code === 200) {
+                const profileResponse = await Requests.getUser();
+                if (profileResponse.code === 200) {
+                    dispatch({ type: "CONNECT", payload: profileResponse.data });
+                } else {
+                    errors.push(profileResponse.message);
+                }
+            } else {
+                errors.push(loginResponse.message);
+            }
+
+            if (errors.length > 0) {
                 setSubmitting(false);
                 setComplementValues({
                     ...values,
                     isValid: false,
-                    errors: ["Identifiants invalides."]
+                    errors
                 });
             }
         }
@@ -80,7 +90,9 @@ const LoginForm = () => {
                             </button>
                             {
                                 (complementValues.errors && complementValues.errors.length > 0) &&
-                                <div className="error-message">Identifiants invalides.</div>
+                                complementValues.errors.map((error, index) => {
+                                    return <div className="error-message" key={index}>{error}</div>
+                                })
                             }
                         </div>
                     </StyledForm>

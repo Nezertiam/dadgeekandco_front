@@ -12,7 +12,13 @@ export const getUser = async () => {
     };
     data.profile.user = response.data.user._id;
 
-    return data;
+    const formatedResponse = {
+        data,
+        message: response.message,
+        code: response.code
+    }
+
+    return formatedResponse;
 }
 
 export const login = async (email, password) => {
@@ -20,6 +26,7 @@ export const login = async (email, password) => {
     if (response && response.data) {
         localStorage.setItem("token", response.data);
     }
+    return response;
 }
 
 
@@ -29,6 +36,12 @@ export const login = async (email, password) => {
 // ARTICLES
 export const getArticle = async (slug) => {
     const response = await ApiHandler.get(`${url}/article/${slug}`);
+    return response;
+}
+
+export const getArticles = async (size = 3, page = 1, category = null) => {
+    const uri = `${url}/article?size=${size}&page=${page}${category ? `&category=${category}` : ""}`
+    const response = await ApiHandler.get(uri);
     return response;
 }
 
@@ -49,6 +62,7 @@ const Requests = {
     login,
 
     getArticle,
+    getArticles,
     postArticle,
     putArticle,
 }
