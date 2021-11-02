@@ -32,8 +32,8 @@ const Container = styled.div`
     max-width: 450px;
     margin: 0 auto;
     padding: 2rem 1rem 0.75rem;
-    border-top: ${({ theme }) => theme.colors.container.border};
-    border-left: ${({ theme }) => theme.colors.container.border};
+    border-top: ${({ theme }) => theme.colors.container.borderGlass};
+    border-left: ${({ theme }) => theme.colors.container.borderGlass};
     background-color: ${({ theme }) => theme.colors.container.background};
     backdrop-filter: blur(5px);
     min-height: 100%;
