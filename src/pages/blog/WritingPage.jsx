@@ -19,6 +19,7 @@ const WritingPage = () => {
     const [returnToNew, setToNew] = useState(false);
     const [article, setArticle] = useState(null);
     const [createdArticle, setCreatedArticle] = useState(null);
+    const [list, setList] = useState(null);
 
     const { slug } = useParams();
 
@@ -30,12 +31,22 @@ const WritingPage = () => {
             setContent(response.data.article.content);
             setCategories(response.data.article.categories);
             setArticle(response.data.article);
+        } else if (response.code === 503) {
+
         } else {
             setToNew(true);
         }
     }
 
+    const getCategories = async () => {
+        const response = await Requests.getCategories();
+        if (response.code === 200) {
+            setList(response.data);
+        }
+    }
+
     useEffect(() => {
+        getCategories();
         if (slug) {
             console.log(slug)
             getArticleAndSetValues(slug)
@@ -82,6 +93,21 @@ const WritingPage = () => {
         }
     }
 
+
+    const handleCategories = (id) => {
+        const cats = categories;
+
+        if (categories.includes(id)) {
+            cats.splice(cats.indexOf(id), 1);
+        } else {
+            cats.push(id);
+        }
+        setCategories(null);
+        setCategories(cats);
+        console.log(categories)
+    }
+
+
     if (isValid) {
         return <Redirect to={`/blog/article/edit/${createdArticle.slug}`} />
     }
@@ -94,6 +120,8 @@ const WritingPage = () => {
             <div className="editor-container">
                 <h2><span>é</span>crire un nouvel article</h2>
                 <hr />
+
+
                 <label htmlFor="article-title-input">Titre</label>
                 <input
                     type="text"
@@ -103,15 +131,43 @@ const WritingPage = () => {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
-                <label htmlFor="article-thumbnail-input">Miniature</label>
+
+
+                <label htmlFor="article-thumbnail-input">Image principale</label>
                 <input
                     type="text"
                     id="article-thumbnail-input"
                     name="article-thumbnail-input"
-                    placeholder="Miniature de l'article (lien http vers une image)"
+                    placeholder="Image principale de l'article (lien http vers une image)"
                     value={thumbnail}
                     onChange={(e) => setThumbnail(e.target.value)}
                 />
+
+
+                <label htmlFor="article-categories-checklist">Catégories</label>
+                <div id="article-categories-checklist">
+
+                    {
+                        list &&
+                        list.map((element, index) => {
+                            return (
+                                <div key={index} className="list-element">
+                                    <input type="checkbox" name={element.title} id={element.title} checked={categories.includes(element._id)} onChange={() => handleCategories(element._id)} />
+                                    <label htmlFor={element.title}>{element.title}</label>
+                                </div>
+                            )
+                        })
+                    }
+                    const
+                    {
+                        !list &&
+                        <div>
+                            Pas de catégorie créée encore...
+                        </div>
+                    }
+
+                </div>
+
                 <label>Contenu</label>
                 <MDEditor
                     value={content}

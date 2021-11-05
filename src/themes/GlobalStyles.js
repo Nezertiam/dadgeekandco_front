@@ -30,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   a {
-    color: ${({ theme }) => theme.colors.link.text};
+    color: ${({ theme }) => theme.colors.secondary};
     cursor: pointer;
     text-decoration: none;
     &:hover {
@@ -50,7 +50,7 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 4px;
     margin-top: 5px;
     cursor: pointer;
-    background-color: ${({ theme }) => theme.colors.button.background};
+    background-color: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.button.text};
     font-family: ${({ theme }) => theme.font};
     letter-spacing: 1px;

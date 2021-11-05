@@ -12,8 +12,8 @@ const ArticleCard = (props) => {
     }
 
     return (
-        <Card {...props} thumbnail={thumbnail} onClick={() => setClicked(true)}>
-            <div className="article">
+        <Card {...props} thumbnail={thumbnail} title={title}>
+            <div className="article" onClick={() => setClicked(true)}>
                 <div className="categories">
 
                 </div>
@@ -23,7 +23,7 @@ const ArticleCard = (props) => {
             </div>
             <div className="infos">
                 <div>
-                    <p>Par {user.name}</p>
+                    <p title={"Ecrit par: " + user.name}>Par {user.name}</p>
                 </div>
             </div>
         </Card>
@@ -31,12 +31,14 @@ const ArticleCard = (props) => {
 }
 
 
-const Card = styled.div`
+const Card = styled.article`
 
-    width: 275px;
+    width: 400px;
     max-width: 85vw;
 
+    
     .article {
+        cursor: pointer;
         border-radius: 7px 7px 0 0;
         border: ${({ theme }) => theme.colors.container.border};
         border-bottom: none;
@@ -51,7 +53,7 @@ const Card = styled.div`
         background-size: cover;
 
         width: 100%;
-        height: 150px;
+        height: 200px;
         max-height: 45vw;
 
         .title {

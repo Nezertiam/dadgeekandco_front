@@ -5,6 +5,9 @@ import styled from 'styled-components';
 // Container
 import PageContainer from '../../components/layout/PageContainer';
 import ArticleCard from '../../components/ui/ArticleCard';
+import ButtonStyleLink from '../../components/ui/ButtonStyleLink';
+import Divider from '../../components/ui/Divider';
+import NothingToShow from '../../components/ui/NothingToShow';
 
 // Middlewares
 import Requests from '../../middleware/Requests';
@@ -28,7 +31,29 @@ const HomePage = () => {
     return (
         <Container>
             <h1>Le blog des Geemers</h1>
-            <ArticlesUpdates articles={lastArticles} noArticleMessage={message} />
+
+            <div className="placeholder"></div>
+
+            <section id="last-articles">
+                <h2>Les derniers articles</h2>
+                <Divider />
+
+                {
+                    lastArticles
+                        ? <>
+                            <ArticlesUpdates articles={lastArticles} noArticleMessage={message} />
+
+                            <ButtonStyleLink to="/blog" position="center" title="Aller au blog">
+                                Lire plus d'articles
+                            </ButtonStyleLink>
+                        </>
+                        : <NothingToShow message={message ?? "Aucun article à afficher..."} />
+
+                }
+            </section>
+
+
+
         </Container>
     )
 }
@@ -54,13 +79,22 @@ const Container = styled(PageContainer)`
     h1 {
         text-align: center;
         margin-top: 1rem;
+        text-transform: uppercase;
+    }
+    h2 {
+        text-align: center;
+    }
+    .placeholder {
+        height: 100px;
     }
     .article-news-container {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 1rem;
+
         &>* {
-            margin: 1rem 0;
+            margin: 1rem;
         }
     }
 `

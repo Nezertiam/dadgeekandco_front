@@ -11,6 +11,8 @@
                 "body": "#e0e0e0d6",
                 "text": "#000000",
                 "hr": "#b6b6b6",
+                "primary": "#bf0f02",
+                "secondary": "#eb5e5b",
                 "container": {
                     "backgroundglass": "rgba(255, 255, 255, 0.65)",
                     "background": "rgb(255, 255, 255)",
@@ -24,11 +26,9 @@
                     "backgroundAlt": "#414040"
                 },
                 "button": {
-                    "text": "#FFFFFF",
-                    "background": "#bf0f02"
+                    "text": "#FFFFFF"
                 },
                 "link": {
-                    "text": "coral",
                     "opacity": 1
                 },
                 "footer": {
