@@ -25,31 +25,6 @@ const WritingPage = () => {
 
     const { slug } = useParams();
 
-    const getArticleAndSetValues = async (slug) => {
-        const response = await Requests.getArticle(slug);
-        if (response.code === 200) {
-            if (response.data.article.user._id === user._id || user.roles.includes("ROLE_ADMIN")) {
-                setTitle(response.data.article.title);
-                setThumbnail(response.data.article.thumbnail)
-                setContent(response.data.article.content);
-                setArticle(response.data.article);
-                // setCategories(response.data.article.categories)
-                const resCat = response.data.article.categories;
-                const cats = [];
-                resCat.map((category) => {
-                    return cats.push(category._id);
-                })
-                setCategories(cats);
-            } else {
-                setToNew(true);
-            }
-        } else if (response.code === 503) {
-
-        } else {
-            setToNew(true);
-        }
-    }
-
     const getCategories = async () => {
         const response = await Requests.getCategories();
         if (response.code === 200) {
@@ -61,10 +36,34 @@ const WritingPage = () => {
 
     useEffect(() => {
         getCategories();
+        const getArticleAndSetValues = async (slug) => {
+            const response = await Requests.getArticle(slug);
+            if (response.code === 200) {
+                if (response.data.article.user._id === user._id || user.roles.includes("ROLE_ADMIN")) {
+                    setTitle(response.data.article.title);
+                    setThumbnail(response.data.article.thumbnail)
+                    setContent(response.data.article.content);
+                    setArticle(response.data.article);
+                    // setCategories(response.data.article.categories)
+                    const resCat = response.data.article.categories;
+                    const cats = [];
+                    resCat.map((category) => {
+                        return cats.push(category._id);
+                    })
+                    setCategories(cats);
+                } else {
+                    setToNew(true);
+                }
+            } else if (response.code === 503) {
+
+            } else {
+                setToNew(true);
+            }
+        }
         if (slug) {
             getArticleAndSetValues(slug)
         }
-    }, [slug])
+    }, [slug, user._id, user.roles])
 
     const handleSave = async () => {
         if (!isSubmitting) {
