@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
+import ArticleBadge from './ArticleBadge';
 
 const ArticleCard = (props) => {
 
-    const { thumbnail, user, title, slug, updatedAt, createdAt } = props.article;
+    const { thumbnail, user, title, slug, updatedAt, createdAt, categories } = props.article;
     const updateDate = (props.chooseUpdateDate && props.chooseUpdateDate === true) ?? false;
 
     const date = new Date(updateDate ? updatedAt : createdAt).toLocaleDateString();
@@ -13,7 +14,12 @@ const ArticleCard = (props) => {
         <Card {...props} thumbnail={thumbnail} title={title}>
             <Link to={`/blog/article/read/${slug}`} className="article">
                 <div className="categories">
-
+                    {
+                        categories.length > 0 &&
+                        categories.map((category, index) => {
+                            return <ArticleBadge category={category} key={index} />
+                        })
+                    }
                 </div>
                 <div className="title">
                     <p>{title}</p>
@@ -61,6 +67,12 @@ const Card = styled.article`
         width: 100%;
         height: 200px;
         max-height: 45vw;
+
+        .categories {
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
 
         .title {
             background-color: #000000e2;
