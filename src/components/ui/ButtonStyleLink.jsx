@@ -1,19 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { ChevronRight } from '../../assets'
 
 const ButtonStyleLink = (props) => {
+
+    const to = props.to ?? "/";
+    let history = useHistory();
+
     return (
         <ButtonLike {...props}>
             <div className="container">
-                <Link to={props.to ?? "/"}>
+                <Link to={to}>
                     {props.children}
                 </Link>
-
                 <ChevronRight width="30px" height="30px" className="chevron" />
             </div>
-
         </ButtonLike>
     )
 }

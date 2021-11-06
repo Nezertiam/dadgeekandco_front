@@ -30,7 +30,7 @@ const HomePage = () => {
 
     return (
         <Container>
-            <h1>Le blog des Geemers</h1>
+            <h1>Le <span className="primary-color">blog</span> des Geemers</h1>
 
             <div className="placeholder"></div>
 
@@ -48,10 +48,8 @@ const HomePage = () => {
                             </ButtonStyleLink>
                         </>
                         : <NothingToShow message={message ?? "Aucun article à afficher..."} />
-
                 }
             </section>
-
 
 
         </Container>
@@ -83,6 +81,9 @@ const Container = styled(PageContainer)`
     }
     h2 {
         text-align: center;
+    }
+    .primary-color {
+        color: ${({ theme }) => theme.colors.primary}
     }
     .placeholder {
         height: 100px;

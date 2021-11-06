@@ -22,12 +22,12 @@ const getInitialConfig = () => {
     const token = localStorage.getItem("token");
     const config = (token) ? {
         headers: {
-            "Access-Control-Allow-Origin": "http://localhost:3000",
+            "Access-Control-Allow-Origin": "*",
             "x-auth-token": token
         }
     } : {
         headers: {
-            "Access-Control-Allow-Origin": "http://localhost:3000"
+            "Access-Control-Allow-Origin": "*"
         }
     }
     return config;
