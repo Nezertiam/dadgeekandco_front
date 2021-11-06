@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const ArticleBadge = (props) => {
 
-    const { title, slug } = props.category;
+    const { title } = props.category;
 
     return (
         <StyledBadge {...props}>
