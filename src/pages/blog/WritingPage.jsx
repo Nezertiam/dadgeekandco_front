@@ -29,8 +29,14 @@ const WritingPage = () => {
             setTitle(response.data.article.title);
             setThumbnail(response.data.article.thumbnail)
             setContent(response.data.article.content);
-            setCategories(response.data.article.categories);
             setArticle(response.data.article);
+            // setCategories(response.data.article.categories)
+            const resCat = response.data.article.categories;
+            const cats = [];
+            resCat.map((category) => {
+                return cats.push(category._id);
+            })
+            setCategories(cats);
         } else if (response.code === 503) {
 
         } else {
@@ -42,17 +48,17 @@ const WritingPage = () => {
         const response = await Requests.getCategories();
         if (response.code === 200) {
             setList(response.data);
+        } else {
+            setToNew(true);
         }
     }
 
     useEffect(() => {
         getCategories();
         if (slug) {
-            console.log(slug)
             getArticleAndSetValues(slug)
         }
     }, [slug])
-
 
     const handleSave = async () => {
         if (!isSubmitting) {
@@ -96,13 +102,11 @@ const WritingPage = () => {
 
     const handleCategories = (id) => {
         const cats = categories;
-
         if (categories.includes(id)) {
             cats.splice(cats.indexOf(id), 1);
         } else {
             cats.push(id);
         }
-        setCategories(null);
         setCategories(cats);
         console.log(categories)
     }
@@ -145,24 +149,26 @@ const WritingPage = () => {
 
 
                 <label htmlFor="article-categories-checklist">Catégories</label>
-                <div id="article-categories-checklist">
-
+                <div id="article-categories-checklist" className="categories-list">
                     {
                         list &&
                         list.map((element, index) => {
                             return (
                                 <div key={index} className="list-element">
-                                    <input type="checkbox" name={element.title} id={element.title} checked={categories.includes(element._id)} onChange={() => handleCategories(element._id)} />
-                                    <label htmlFor={element.title}>{element.title}</label>
+                                    <button
+                                        onClick={(e) => { handleCategories(element._id); e.target.classList.toggle("active") }}
+                                        className={`category-btn${categories.includes(element._id) ? " active" : ""}`}
+                                    >
+                                        {element.title}
+                                    </button>
                                 </div>
                             )
                         })
                     }
-                    const
                     {
                         !list &&
                         <div>
-                            Pas de catégorie créée encore...
+                            Pas de catégorie encore créée...
                         </div>
                     }
 
@@ -181,7 +187,7 @@ const WritingPage = () => {
                 <h2 className="preview-title">Aperçu final</h2>
                 <ReadContainer title={title} content={content} />
             </div>
-        </Container>
+        </Container >
     );
 }
 
@@ -191,11 +197,35 @@ const Container = styled.div`
     .editor-container {
         padding: 2rem 5rem;
         margin-top: 3rem;
+        .category-btn {
+            padding: 0;
+            padding: 0.25rem 1rem;
+            margin: 0.25rem;
+            
+            background-color: white;
+            color: ${({ theme }) => theme.colors.text};
+            border-radius: 20px;
+
+            transition: background-color 0.4s, color 0.2s, transform 0.5s;
+
+            &:focus:active {
+                transform: translateY(10px);
+            }
+
+            &.active {
+                color: ${({ theme }) => theme.colors.textContrast};
+                background-color: ${({ theme }) => theme.colors.secondary};
+            }
+        }
         .save-button {
             display: flex;
             justify-content: right;
             margin-right: 2rem;
             margin-top: 1rem;
+        }
+        .categories-list {
+            display: flex;
+            margin-bottom: 0.75rem;
         }
         h2 {
             text-transform: lowercase;

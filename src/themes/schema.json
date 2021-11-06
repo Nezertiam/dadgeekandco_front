@@ -10,6 +10,7 @@
             "colors": {
                 "body": "#e0e0e0d6",
                 "text": "#000000",
+                "textContrast": "#FFFFFF",
                 "hr": "#b6b6b6",
                 "primary": "#bf0f02",
                 "secondary": "#eb5e5b",
