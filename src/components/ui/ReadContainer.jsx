@@ -2,11 +2,21 @@ import React from 'react'
 import styled from 'styled-components'
 import MDEditor from '@uiw/react-md-editor';
 import PageContainer from '../layout/PageContainer';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const ReadContainer = (props) => {
+
+    const user = useSelector((state) => state.user);
+    const path = window.location.href;
+
     return (
         <Container {...props}>
+            {
+                (!path.includes("/blog/article/edit") && ((user && user.roles.includes("ROLE_ADMIN")) || ((props.article && user) && props.article.user._id === user._id))) &&
+                <Link to={`/blog/article/edit/${props.article.slug}`}>Editer cet article</Link>
+            }
             <h1>{props.article ? props.article.title : props.title}</h1>
             <hr />
             {
