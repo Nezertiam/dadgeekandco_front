@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Twitch, Discord, Twitter, Youtube } from '../../assets'
+import { Twitch, Twitter, Youtube } from '../../assets'
 import Copy from '../ui/Copy'
 
 const Footer = () => {
@@ -10,22 +10,22 @@ const Footer = () => {
                 <p className="socials-heading">Suis l'aventure sur les reseaux !</p>
                 <ul className="socials-container">
                     <li className="socials">
-                        <a href="/">
+                        <a href="https://www.twitch.tv/dadgeek_and_co" target="_blank" rel="noreferrer">
                             <Twitch />
                         </a>
                     </li>
-                    <li className="socials">
-                        <a href="/">
+                    {/* <li className="socials">
+                        <a href="/" target="_blank" rel="noreferrer">
                             <Discord />
                         </a>
-                    </li>
+                    </li> */}
                     <li className="socials">
-                        <a href="/">
+                        <a href="https://twitter.com/dadgeek2" target="_blank" rel="noreferrer">
                             <Twitter />
                         </a>
                     </li>
                     <li className="socials">
-                        <a href="/">
+                        <a href="https://www.youtube.com/channel/UCCa1oDtfNevea_yHLjm1isQ" target="_blank" rel="noreferrer">
                             <Youtube />
                         </a>
                     </li>
