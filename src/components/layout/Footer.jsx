@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <StyledFooter className="layout-footer">
             <div className="footer-container">
-                <p className="socials-heading">Suis l'aventure sur les reseaux !</p>
+                <p className="socials-heading">Suis l'aventure sur les réseaux !</p>
                 <ul className="socials-container">
                     <li className="socials">
                         <a href="https://www.twitch.tv/dadgeek_and_co" target="_blank" rel="noreferrer">
