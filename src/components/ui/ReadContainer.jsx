@@ -10,9 +10,9 @@ const ReadContainer = (props) => {
             <h1>{props.article ? props.article.title : props.title}</h1>
             <hr />
             {
-                (props.article && props.article.thumbnail) &&
+                ((props.article && props.article.thumbnail) || props.thumbnail) &&
                 <div className="image-container">
-                    <img src={props.article.thumbnail} alt={props.article ? props.article.title : props.title} />
+                    <img src={props.article ? props.article.thumbnail : props.thumbnail} alt={props.article ? props.article.title : props.title} />
                 </div>
             }
             <MDEditor.Markdown source={props.article ? props.article.content : props.content} />

@@ -122,7 +122,7 @@ const WritingPage = () => {
     return (
         <Container>
             <div className="editor-container">
-                <h2><span>é</span>crire un nouvel article</h2>
+                <h2>écrire un nouvel article</h2>
                 <hr />
 
 
@@ -185,7 +185,7 @@ const WritingPage = () => {
             </div>
             <div className="preview-container">
                 <h2 className="preview-title">Aperçu final</h2>
-                <ReadContainer title={title} content={content} />
+                <ReadContainer title={title} content={content} thumbnail={thumbnail} />
             </div>
         </Container >
     );
@@ -230,9 +230,7 @@ const Container = styled.div`
         h2 {
             text-transform: lowercase;
             letter-spacing: 2px;
-            span {
-                text-transform: uppercase;
-            }
+            text-transform: uppercase;
         }
         hr {
             margin: 1rem auto 3rem;
