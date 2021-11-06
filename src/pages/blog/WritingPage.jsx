@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import Requests from "../../middleware/Requests";
 import ReadContainer from "../../components/ui/ReadContainer";
+import { useSelector } from "react-redux";
 
 
 
@@ -20,23 +21,28 @@ const WritingPage = () => {
     const [article, setArticle] = useState(null);
     const [createdArticle, setCreatedArticle] = useState(null);
     const [list, setList] = useState(null);
+    const user = useSelector((state) => state.user);
 
     const { slug } = useParams();
 
     const getArticleAndSetValues = async (slug) => {
         const response = await Requests.getArticle(slug);
         if (response.code === 200) {
-            setTitle(response.data.article.title);
-            setThumbnail(response.data.article.thumbnail)
-            setContent(response.data.article.content);
-            setArticle(response.data.article);
-            // setCategories(response.data.article.categories)
-            const resCat = response.data.article.categories;
-            const cats = [];
-            resCat.map((category) => {
-                return cats.push(category._id);
-            })
-            setCategories(cats);
+            if (response.data.article.user._id === user._id) {
+                setTitle(response.data.article.title);
+                setThumbnail(response.data.article.thumbnail)
+                setContent(response.data.article.content);
+                setArticle(response.data.article);
+                // setCategories(response.data.article.categories)
+                const resCat = response.data.article.categories;
+                const cats = [];
+                resCat.map((category) => {
+                    return cats.push(category._id);
+                })
+                setCategories(cats);
+            } else {
+                setToNew(true);
+            }
         } else if (response.code === 503) {
 
         } else {
