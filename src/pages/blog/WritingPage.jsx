@@ -28,7 +28,7 @@ const WritingPage = () => {
     const getArticleAndSetValues = async (slug) => {
         const response = await Requests.getArticle(slug);
         if (response.code === 200) {
-            if (response.data.article.user._id === user._id) {
+            if (response.data.article.user._id === user._id || user.roles.includes("ROLE_ADMIN")) {
                 setTitle(response.data.article.title);
                 setThumbnail(response.data.article.thumbnail)
                 setContent(response.data.article.content);
