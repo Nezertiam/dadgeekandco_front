@@ -206,10 +206,10 @@ const Container = styled.div`
             color: ${({ theme }) => theme.colors.text};
             border-radius: 20px;
 
-            transition: background-color 0.4s, color 0.2s, transform 0.5s;
+            transition: background-color 0.4s, color 0.2s;
 
             &:focus:active {
-                transform: translateY(10px);
+                transform: translateY(3px);
             }
 
             &.active {
