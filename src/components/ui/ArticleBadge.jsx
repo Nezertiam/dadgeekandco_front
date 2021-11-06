@@ -16,7 +16,8 @@ const StyledBadge = styled.span`
     background-color: ${({ theme }) => theme.colors.secondary};
     border: 2px solid ${({ theme }) => theme.colors.primary};
     padding: 0.25rem 1rem;
-    border-radius: 10px;
+    border-radius: 20px;
+    font-size: 0.80rem;
 `
 
 export default ArticleBadge
