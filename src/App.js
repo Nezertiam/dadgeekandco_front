@@ -50,8 +50,10 @@ const App = () => {
         const isExp = hooks.isTokenExpired();
         if (isExp) throw Error("Token expired");
         const response = await Requests.getUser();
-        dispatch({ type: "FIRST_CONNEXION", payload: response });
+        console.log(response);
+        dispatch({ type: "FIRST_CONNEXION", payload: response.data });
       } catch (err) {
+        console.log(err.message)
         localStorage.removeItem("token");
         if (isLogged) dispatch({ type: "DISCONNECT" });
       }
