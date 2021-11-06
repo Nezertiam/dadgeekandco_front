@@ -47,8 +47,8 @@ const Menu = () => {
                         {/* Twitch */}
                         <li className="title separator"><Link to="/">Twitch</Link></li>
                         <hr />
-                        <li><Link to="/">Mon live</Link></li>
-                        <li><Link to="/">Le live des copains</Link></li>
+                        <li><a href="https://www.twitch.tv/dadgeek_and_co" target="_blank" rel="noreferrer">Mon live</a></li>
+                        {/* <li><Link to="/">Le live des copains</Link></li> */}
 
 
                         {/* Blog */}
