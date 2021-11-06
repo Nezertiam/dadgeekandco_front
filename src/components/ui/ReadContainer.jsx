@@ -11,10 +11,16 @@ const ReadContainer = (props) => {
     const user = useSelector((state) => state.user);
     const path = window.location.href;
 
+    const notInEditPage = !path.includes("/blog/article/edit");
+    const isAdmin = user && user.roles.includes("ROLE_ADMIN");
+    const isAuthor = (props.article && user) && (props.article.user._id === user._id && user.roles.includes("ROLE_AUTHOR"));
+
+    const date = notInEditPage && new Date(props.article.createdAt).toLocaleDateString();
+
     return (
         <Container {...props}>
             {
-                (!path.includes("/blog/article/edit") && ((user && user.roles.includes("ROLE_ADMIN")) || ((props.article && user) && props.article.user._id === user._id))) &&
+                (notInEditPage && (isAdmin || isAuthor)) &&
                 <Link to={`/blog/article/edit/${props.article.slug}`}>Editer cet article</Link>
             }
             <h1>{props.article ? props.article.title : props.title}</h1>
@@ -24,6 +30,19 @@ const ReadContainer = (props) => {
                 <div className="image-container">
                     <img src={props.article ? props.article.thumbnail : props.thumbnail} alt={props.article ? props.article.title : props.title} />
                 </div>
+            }
+            {
+                <p className="author">
+                    Ecrit par
+                    <span className="italic">&nbsp;{notInEditPage ? props.article.user.name : user.name}&nbsp;</span>
+                    {
+                        notInEditPage &&
+                        <>
+                            le
+                            <span className="italic">&nbsp;{date}&nbsp;</span>
+                        </>
+                    }
+                </p>
             }
             <MDEditor.Markdown source={props.article ? props.article.content : props.content} />
         </Container>
@@ -44,6 +63,9 @@ const Container = styled(PageContainer)`
             width: 100%;
         }
     }
+    .italic {
+        font-style: italic;
+    }
 
     hr {
         margin: 1rem 0 2rem;
@@ -52,9 +74,13 @@ const Container = styled(PageContainer)`
     p {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         img {
             width: 200px;
+            margin: 0 auto;
+        }
+        &.author {
+            margin-left: 2rem;
+            margin-bottom: 3rem;
         }
     }
 
