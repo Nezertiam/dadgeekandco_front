@@ -56,6 +56,7 @@ const Container = styled(PageContainer)`
     backdrop-filter: blur(7px);
     width: unset;
     max-width: 1128px;
+    padding: 1.5rem;
 
     .image-container {
         width: 100%;
