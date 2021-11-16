@@ -12,7 +12,7 @@ const ArticleCard = (props) => {
 
     return (
         <Card {...props} thumbnail={thumbnail} title={title}>
-            <Link to={`/blog/article/read/${slug}`} className="article">
+            <Link to={`/blog/article/read/${slug}`} className="article-link">
                 <div className="categories">
                     {
                         categories.length > 0 &&
@@ -21,7 +21,7 @@ const ArticleCard = (props) => {
                         })
                     }
                 </div>
-                <div className="title">
+                <div className="article-title">
                     <p>{title}</p>
                 </div>
             </Link>
@@ -37,8 +37,8 @@ const ArticleCard = (props) => {
 const Card = styled.article`
 
     border-radius: 7px;
-    width: 400px;
-    max-width: 85vw;
+    width: 100%;
+    max-width: 400px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
     transition: transform 0.3s, box-shadow 0.3s;
@@ -48,7 +48,7 @@ const Card = styled.article`
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     }
     
-    .article {
+    .article-link {
         cursor: pointer;
         border-radius: 7px 7px 0 0;
         border: ${({ theme }) => theme.colors.container.border};
@@ -65,8 +65,8 @@ const Card = styled.article`
         background-size: cover;
 
         width: 100%;
-        height: 200px;
-        max-height: 45vw;
+        min-height: 200px;
+
 
         .categories {
             padding: 1rem;
@@ -74,7 +74,7 @@ const Card = styled.article`
             flex-wrap: wrap;
         }
 
-        .title {
+        .article-title {
             background-color: #000000e2;
             padding: 0.5rem 1rem;
         }

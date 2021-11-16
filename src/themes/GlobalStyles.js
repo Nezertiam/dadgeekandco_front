@@ -75,4 +75,11 @@ export const GlobalStyles = createGlobalStyle`
   .layout-main-content {
     z-index: 2;
   }
+
+  .title {
+    text-align: center;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
 `;

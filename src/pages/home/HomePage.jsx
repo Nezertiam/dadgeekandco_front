@@ -30,9 +30,9 @@ const HomePage = () => {
 
     return (
         <Container>
-            <h1>Le <span className="primary-color">blog</span> des Geemers</h1>
+            <h1 className="title">Le <span className="primary-color">blog</span> des Geemers</h1>
 
-            <div className="placeholder"></div>
+            {/* <div className="placeholder"></div> */}
 
             <section id="last-articles">
                 <h2>Les derniers articles</h2>
@@ -62,8 +62,8 @@ const ArticlesUpdates = (props) => {
         <div className="article-news-container">
             {
                 props.articles
-                    ? props.articles.map((article, index) => {
-                        return <ArticleCard article={article} key={index} />;
+                    ? props.articles.map((article) => {
+                        return <ArticleCard article={article} key={article._id} />;
                     })
                     : <p>{props.noArticleMessage}</p>
             }
@@ -74,11 +74,6 @@ const ArticlesUpdates = (props) => {
 
 
 const Container = styled(PageContainer)`
-    h1 {
-        text-align: center;
-        margin-top: 1rem;
-        text-transform: uppercase;
-    }
     h2 {
         text-align: center;
     }
@@ -89,13 +84,13 @@ const Container = styled(PageContainer)`
         height: 100px;
     }
     .article-news-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-bottom: 1rem;
-
-        &>* {
-            margin: 1rem;
+        display: grid;
+        justify-items: center;
+        margin-bottom: 2rem;
+        gap: 1.5rem;
+        
+        @media screen and (min-width: 700px) {
+            grid-template-columns: 1fr 1fr 1fr;
         }
     }
 `
