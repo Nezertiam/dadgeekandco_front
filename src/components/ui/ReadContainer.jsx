@@ -55,7 +55,7 @@ const Container = styled(PageContainer)`
     background: ${({ theme }) => theme.colors.container.backgroundglass};
     backdrop-filter: blur(7px);
     width: unset;
-    max-width: 1128px;
+    max-width: 950px;
     padding: 1.5rem;
 
     .image-container {
