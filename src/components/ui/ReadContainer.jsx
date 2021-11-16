@@ -55,7 +55,7 @@ const Container = styled(PageContainer)`
     background: ${({ theme }) => theme.colors.container.backgroundglass};
     backdrop-filter: blur(7px);
     width: unset;
-    max-width: 750px;
+    max-width: 1128px;
 
     .image-container {
         width: 100%;
@@ -75,8 +75,8 @@ const Container = styled(PageContainer)`
         display: flex;
         flex-wrap: wrap;
         img {
-            width: 200px;
-            margin: 0 auto;
+            width: 300px;
+            flex: 2;
         }
         &.author {
             margin-left: 2rem;

@@ -1,6 +1,6 @@
 import ApiHandler from "./api/ApiHandler";
 
-const url = "http://192.168.0.48:5000/api";
+const url = "http://192.168.0.24:5000/api";
 
 
 // USERs

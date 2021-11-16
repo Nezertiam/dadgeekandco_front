@@ -8,7 +8,7 @@ const ProtectedRoute = (props) => {
     const user = useSelector((state) => state.user)
 
     if (!isLogged) {
-        return <Redirect to="/" />
+        return <Redirect to="/connexion" />
     }
 
 

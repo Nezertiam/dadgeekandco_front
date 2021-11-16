@@ -13,6 +13,7 @@ import NotFound from "./pages/errors/NotFound";
 import NewArticlePage from './pages/blog/NewArticlePage';
 import EditArticlePage from './pages/blog/EditArticlePage';
 import ReadArticlePage from './pages/blog/ReadArticlePage';
+import Blog from './pages/blog/Blog';
 
 
 const Router = () => {
@@ -35,6 +36,7 @@ const Router = () => {
             <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/connexion" component={LoginPage} />
+                <Route exact path="/blog" component={Blog} />
                 <Route exact path="/blog/article/read/:slug" component={ReadArticlePage} />
                 <ProtectedRoute exact path="/blog/article/new" component={NewArticlePage} role="ROLE_AUTHOR" />
                 <ProtectedRoute exact path="/blog/article/edit/:slug" component={EditArticlePage} role="ROLE_AUTHOR" />
