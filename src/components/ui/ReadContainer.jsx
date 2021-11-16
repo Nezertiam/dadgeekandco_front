@@ -11,7 +11,7 @@ const ReadContainer = (props) => {
     const user = useSelector((state) => state.user);
     const path = window.location.href;
 
-    const notInEditPage = !path.includes("/blog/article/edit");
+    const notInEditPage = !path.includes("/blog/article/edit") && !path.includes("/blog/article/new");
     const isAdmin = user && user.roles.includes("ROLE_ADMIN");
     const isAuthor = (props.article && user) && (props.article.user._id === user._id && user.roles.includes("ROLE_AUTHOR"));
 
