@@ -86,14 +86,14 @@ const Blog = () => {
                         categories.length > 0 &&
                         <>
                             <select name="categories" id="category-select" onChange={(e) => { setCategory(e.target.value) }}>
-                                <option value={null}>Toutes les catégories</option>
+                                <option value={"all"}>Toutes les catégories</option>
                                 {
                                     categories.map((category) => {
                                         return <option value={category.slug} key={category._id}>{category.title}</option>
                                     })
                                 }
                             </select>
-                            <button onClick={() => newSearch(category)}>Faire une recherche</button>
+                            <button onClick={() => newSearch((category === "all" ? null : category))}>Faire une recherche</button>
                         </>
                     }
                 </div>
@@ -103,7 +103,7 @@ const Blog = () => {
 
             <div className="article-container">
                 {
-                    articles.length > 0
+                    articles && articles.length > 0
                         ? articles.map((article) => {
                             return (
                                 <ArticleCard article={article} key={article._id} />
@@ -115,7 +115,7 @@ const Blog = () => {
             {
                 !noMore
                     ? <Button title="Afficher plus d'articles" position="center" onClick={() => more(limit)}>Afficher plus d'articles</Button>
-                    : <NothingToShow message={"Vous êtes à la fin !"} />
+                    : <></>
             }
         </Container>
     )

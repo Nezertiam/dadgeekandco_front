@@ -45,17 +45,20 @@ const Menu = () => {
 
 
                         {/* Twitch */}
-                        <li className="title separator"><Link to="/">Twitch</Link></li>
+                        <li className="title separator"><a href="https://www.twitch.tv/dadgeek_and_co" target="_blank" rel="noreferrer">Twitch</a></li>
                         <hr />
                         <li><a href="https://www.twitch.tv/dadgeek_and_co" target="_blank" rel="noreferrer">Mon live</a></li>
                         {/* <li><Link to="/">Le live des copains</Link></li> */}
 
 
                         {/* Blog */}
-                        <li className="title separator"><Link to="/">Le Blog</Link></li>
+                        <li className="title separator"><Link to="/blog">Le Blog</Link></li>
                         <hr />
                         <li><Link to="/">Les dernières actus</Link></li>
-                        <li><Link to="/">Recherche par catégorie</Link></li>
+                        {
+                            isLogged &&
+                            <li><Link to="/blog/article/new">Ecrire un nouvel article</Link></li>
+                        }
 
                         {/* Account */}
                         <li className="title separator">Mon compte</li>
