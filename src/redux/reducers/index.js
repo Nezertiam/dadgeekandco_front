@@ -10,6 +10,7 @@ import profileReducer from "./profile";
 import themeReducer from "./theme";
 import menuReducer from "./isMenuOpen"
 import serverReducer from "./serverConnexion";
+import categoryReducer from "./category";
 
 const reducers = combineReducers({
     isServerConnected: serverReducer,
@@ -20,6 +21,7 @@ const reducers = combineReducers({
     user: userReducer,
     profile: profileReducer,
     theme: themeReducer,
+    creatingCategory: categoryReducer
 })
 
 export default reducers;

@@ -61,6 +61,10 @@ export const getCategories = async () => {
     const response = await ApiHandler.get(`${url}/category`);
     return response;
 }
+export const postCategories = async (data) => {
+    const response = await ApiHandler.post(`${url}/category`, data);
+    return response;
+}
 
 
 
@@ -74,6 +78,7 @@ const Requests = {
     putArticle,
 
     getCategories,
+    postCategories,
 }
 
 export default Requests;

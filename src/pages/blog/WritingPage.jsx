@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import MDEditor from '@uiw/react-md-editor';
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 import Requests from "../../middleware/Requests";
 import ReadContainer from "../../components/ui/ReadContainer";
-import { useSelector } from "react-redux";
 
+import { NewCategoryPopup } from "./NewCategory";
 
 
 const WritingPage = () => {
 
+    const dispatch = useDispatch();
     const [title, setTitle] = useState("");
     const [thumbnail, setThumbnail] = useState("");
     const [content, setContent] = useState("");
@@ -22,8 +24,19 @@ const WritingPage = () => {
     const [createdArticle, setCreatedArticle] = useState(null);
     const [list, setList] = useState(null);
     const user = useSelector((state) => state.user);
+    const [openPopup, setPopup] = useState(false);
 
     const { slug } = useParams();
+
+    const creatingCategory = useSelector((state) => state.creatingCategory);
+
+    useEffect(() => {
+        if (creatingCategory) {
+            getCategories();
+            setPopup(false);
+            dispatch({ type: "CATEGORY_CREATED" });
+        }
+    }, [creatingCategory, dispatch])
 
     const getCategories = async () => {
         const response = await Requests.getCategories();
@@ -125,74 +138,90 @@ const WritingPage = () => {
     }
 
     return (
-        <Container>
-            <div className="editor-container">
-                <h2>écrire un nouvel article</h2>
-                <hr />
+        <>
+            <Container>
+                {
+                    (openPopup && !creatingCategory) &&
+                    <NewCategoryPopup close={() => {
+                        setPopup(false);
+                    }} />
+                }
+
+                <div className="editor-container">
+                    <h2>écrire un nouvel article</h2>
+                    <hr />
 
 
-                <label htmlFor="article-title-input">Titre</label>
-                <input
-                    type="text"
-                    id="article-title-input"
-                    name="article-title-input"
-                    placeholder="Titre de l'article"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
+                    <label htmlFor="article-title-input">Titre</label>
+                    <input
+                        type="text"
+                        id="article-title-input"
+                        name="article-title-input"
+                        placeholder="Titre de l'article"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
 
 
-                <label htmlFor="article-thumbnail-input">Image principale</label>
-                <input
-                    type="text"
-                    id="article-thumbnail-input"
-                    name="article-thumbnail-input"
-                    placeholder="Image principale de l'article (lien http vers une image)"
-                    value={thumbnail}
-                    onChange={(e) => setThumbnail(e.target.value)}
-                />
+                    <label htmlFor="article-thumbnail-input">Image principale</label>
+                    <input
+                        type="text"
+                        id="article-thumbnail-input"
+                        name="article-thumbnail-input"
+                        placeholder="Image principale de l'article (lien http vers une image)"
+                        value={thumbnail}
+                        onChange={(e) => setThumbnail(e.target.value)}
+                    />
 
 
-                <label htmlFor="article-categories-checklist">Catégories</label>
-                <div id="article-categories-checklist" className="categories-list">
-                    {
-                        list &&
-                        list.map((element, index) => {
-                            return (
-                                <div key={index} className="list-element">
-                                    <button
-                                        onClick={(e) => { handleCategories(element._id); e.target.classList.toggle("active") }}
-                                        className={`category-btn${categories.includes(element._id) ? " active" : ""}`}
-                                    >
-                                        {element.title}
-                                    </button>
-                                </div>
-                            )
-                        })
-                    }
-                    {
-                        !list &&
+                    <label htmlFor="article-categories-checklist">Catégories</label>
+                    <div id="article-categories-checklist" className="categories-list">
+                        {
+                            list &&
+                            list.map((element, index) => {
+                                return (
+                                    <div key={index} className="list-element">
+                                        <button
+                                            onClick={(e) => { handleCategories(element._id); e.target.classList.toggle("active") }}
+                                            className={`category-btn${categories.includes(element._id) ? " active" : ""}`}
+                                        >
+                                            {element.title}
+                                        </button>
+                                    </div>
+                                )
+                            })
+                        }
+                        {
+                            !list &&
+                            <div>
+                                Pas de catégorie encore créée...
+                            </div>
+                        }
                         <div>
-                            Pas de catégorie encore créée...
+                            <button
+                                className={`category-btn add`}
+                                onClick={() => !openPopup && setPopup(true)}
+                            >
+                                +
+                            </button>
                         </div>
-                    }
+                    </div>
 
+                    <label>Contenu</label>
+                    <MDEditor
+                        value={content}
+                        onChange={setContent}
+                    />
+                    <div className="save-button">
+                        <button onClick={handleSave} disabled={isSubmitting}>Sauvegarder</button>
+                    </div>
                 </div>
-
-                <label>Contenu</label>
-                <MDEditor
-                    value={content}
-                    onChange={setContent}
-                />
-                <div className="save-button">
-                    <button onClick={handleSave} disabled={isSubmitting}>Sauvegarder</button>
+                <div className="preview-container">
+                    <h2 className="preview-title">Aperçu final</h2>
+                    <ReadContainer title={title} content={content} thumbnail={thumbnail} />
                 </div>
-            </div>
-            <div className="preview-container">
-                <h2 className="preview-title">Aperçu final</h2>
-                <ReadContainer title={title} content={content} thumbnail={thumbnail} />
-            </div>
-        </Container >
+            </Container >
+        </>
     );
 }
 
@@ -221,6 +250,9 @@ const Container = styled.div`
                 color: ${({ theme }) => theme.colors.textContrast};
                 background-color: ${({ theme }) => theme.colors.secondary};
             }
+            &.add {
+                border: 1px solid gray;
+            }
         }
         .save-button {
             display: flex;
@@ -231,6 +263,8 @@ const Container = styled.div`
         .categories-list {
             display: flex;
             margin-bottom: 0.75rem;
+            display: flex;
+            flex-wrap: wrap; 
         }
         h2 {
             text-transform: lowercase;
